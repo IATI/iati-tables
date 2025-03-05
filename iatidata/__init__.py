@@ -11,7 +11,6 @@ import shutil
 import subprocess
 import tempfile
 import time
-import traceback
 import zipfile
 from collections import defaultdict
 from datetime import datetime
@@ -364,16 +363,17 @@ def load(processes: int, sample: Optional[int] = None) -> None:
     datasets_sample = islice(iatikit.data().datasets, sample)
 
     with concurrent.futures.ProcessPoolExecutor(max_workers=processes) as executor:
-        futures = [
-            executor.submit(load_dataset, dataset) for dataset in datasets_sample
-        ]
-        concurrent.futures.wait(futures)
-        # We have to get the result (even though we don't use it) in order to get the exceptions
-        for future in futures:
+        future_to_dataset = {
+            executor.submit(load_dataset, dataset): dataset
+            for dataset in datasets_sample
+        }
+        for future in concurrent.futures.as_completed(future_to_dataset):
+            # We have to get the result (even though we don't use it) in order to get the exceptions
             try:
                 future.result()
-            except Exception:
-                print(traceback.format_exc())
+            except Exception as e:
+                dataset = future_to_dataset[future]
+                logger.error(f"Dataset '{dataset.name}' caused error {e}")
 
     engine = get_engine()
     with engine.begin() as connection:
