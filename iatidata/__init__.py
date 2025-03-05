@@ -262,10 +262,14 @@ def parse_dataset(
         logger.debug(f"Error parsing XML for dataset '{dataset.name}'")
         return
 
+    print('dataset_etree', dataset_etree)
     version = dataset_etree.get("version", "1.01")
+    print('dataset_etree version', version)
+
     if version.startswith("1"):
         logger.debug(f"Transforming v1 {dataset.filetype} file")
         dataset_etree = VERSION_1_TRANSFORMS[dataset.filetype](dataset_etree).getroot()
+        print('dataset_etree in version starts with 1', dataset_etree)
 
     parent_element_name = (
         "iati-organisations"
@@ -273,20 +277,25 @@ def parse_dataset(
         else "iati-activities"
     )
     child_element_name = f"iati-{dataset.filetype}"
-    for child_element in dataset_etree.findall(child_element_name):
-        sort_iati_element(child_element, get_sorted_schema_dict())
-        parent_element = etree.Element(parent_element_name, version=version)
-        parent_element.append(child_element)
+    print('child_element_name', child_element_name)
+    if 'zoa-activities.xml' in dataset.data_path:
+        print('zoa-activities.xml return')
+        return
+    else:
+        for child_element in dataset_etree.findall(child_element_name):
+            sort_iati_element(child_element, get_sorted_schema_dict())
+            parent_element = etree.Element(parent_element_name, version=version)
+            parent_element.append(child_element)
 
-        xmlschema_to_dict_result: tuple[dict[str, Any], list[Any]] = xmlschema.to_dict(
-            parent_element,  # type: ignore
-            schema=get_xml_schema(dataset.filetype),
-            validation="lax",
-            decimal_type=float,
-        )
-        parent_dict, error = xmlschema_to_dict_result
-        child_dict = parent_dict.get(child_element_name, [{}])[0]
-        yield child_dict, error
+            xmlschema_to_dict_result: tuple[dict[str, Any], list[Any]] = xmlschema.to_dict(
+                parent_element,  # type: ignore
+                schema=get_xml_schema(dataset.filetype),
+                validation="lax",
+                decimal_type=float,
+            )
+            parent_dict, error = xmlschema_to_dict_result
+            child_dict = parent_dict.get(child_element_name, [{}])[0]
+            yield child_dict, error
 
 
 def csv_file_to_db(csv_fd):
@@ -303,7 +312,9 @@ def load_dataset(dataset: iatikit.Dataset) -> None:
         logger.warn(f"Dataset '{dataset}' not found")
         return
 
+    print('dataset data_path', dataset.data_path)
     path = pathlib.Path(dataset.data_path)
+    print('dataset', path)
     prefix, filename = path.parts[-2:]
 
     engine = get_engine()
