@@ -30,6 +30,7 @@ from lxml import etree
 from sqlalchemy import Engine, column, create_engine, insert, table, text
 
 from iati_tables import sort_iati
+from iati_tables.extract import extract
 
 logging.basicConfig(
     level=logging.INFO,
@@ -120,28 +121,6 @@ def get_xml_schema(filetype: str) -> xmlschema.XMLSchema10:
                 / "__iatikitcache__/standard/schemas/203/iati-organisations-schema.xsd"
             )
         )
-
-
-def get_standard(refresh=False):
-    if not (pathlib.Path() / "__iatikitcache__").is_dir() or refresh:
-        logger.info("Downloading standard")
-        iatikit.download.standard()
-    else:
-        logger.info("Not refreshing standard")
-
-
-def get_registry(refresh=False):
-    if not (pathlib.Path() / "__iatikitcache__").is_dir() or refresh:
-        logger.info("Downloading registry data")
-        iatikit.download.data()
-    else:
-        logger.info("Not refreshing registry data")
-    return iatikit.data()
-
-
-def extract(refresh: bool = False) -> None:
-    get_standard(refresh)
-    get_registry(refresh)
 
 
 def flatten_schema_docs(cur, path=""):
