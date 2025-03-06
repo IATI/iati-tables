@@ -1,8 +1,8 @@
-name: Test
-on: [push, pull_request]
+name: CI
+on: [push]
 
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,5 +13,13 @@ jobs:
         run: pip install -r requirements_dev.txt
       - name: Install local package
         run: pip install .
-      - name: Test
+      - name: Check isort
+        run: isort --check-only iati_tables/
+      - name: Check black
+        run: black --check iati_tables/
+      - name: Check flake8
+        run: flake8 iati_tables/
+      - name: Check types with mypy
+        run: mypy iati_tables/
+      - name: Run unit tests
         run: pytest
