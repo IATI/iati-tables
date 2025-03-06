@@ -66,7 +66,7 @@ The processing job can be configured using the following environment variables:
 ### Run the processing job
 
 ```
-python -c 'import iatidata; iatidata.run_all(processes=6, sample=50, refresh=False)'
+python -c 'import iati_tables; iati_tables.run_all(processes=6, sample=50, refresh=False)'
 ```
 
 Parameters:
@@ -78,16 +78,16 @@ Parameters:
 ## How to run linting and formating
 
 ```
-isort iatidata/
-black iatidata/
-flake8 iatidata/
-mypy iatidata/
+isort iati_tables/
+black iati_tables/
+flake8 iati_tables/
+mypy iati_tables/
 ```
 
 ## How to run unit tests
 
 ```
-python -m pytest iatidata/
+pytest
 ```
 
 ## How to run the web front-end
