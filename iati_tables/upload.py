@@ -2,10 +2,11 @@ import logging
 import os
 import subprocess
 
+logger = logging.getLogger(__name__)
+
+
 s3_destination = os.environ.get("IATI_TABLES_S3_DESTINATION", "-")
 output_dir = os.environ.get("IATI_TABLES_OUTPUT", ".")
-
-logger = logging.getLogger(__name__)
 
 
 def upload_all():
