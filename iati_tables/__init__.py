@@ -31,6 +31,7 @@ from sqlalchemy import Engine, column, create_engine, insert, table, text
 
 from iati_tables import sort_iati
 from iati_tables.extract import extract
+from iati_tables.upload import upload_all
 
 logging.basicConfig(
     level=logging.INFO,
@@ -45,8 +46,6 @@ this_dir = pathlib.Path(__file__).parent.resolve()
 output_dir = os.environ.get("IATI_TABLES_OUTPUT", ".")
 
 schema = os.environ.get("IATI_TABLES_SCHEMA")
-
-s3_destination = os.environ.get("IATI_TABLES_S3_DESTINATION", "-")
 
 output_path = pathlib.Path(output_dir)
 
@@ -1588,32 +1587,6 @@ def export_all():
         export_bigquery()
     except Exception:
         logger.warning("Big query failed, proceeding anyway")
-
-
-def upload_all():
-    if s3_destination and s3_destination != "-":
-        logger.info("Uploading files to S3")
-        files = [
-            "stats.json",
-            "iati.sqlite.gz",
-            "iati.db.gz",
-            "iati.sqlite",
-            "iati.sqlite.zip",
-            "activities.json.gz",
-            "iati_csv.zip",
-            "iati.custom.pg_dump",
-            "iati.dump.gz",
-        ]
-        for file in files:
-            subprocess.run(
-                ["s3cmd", "put", f"{output_dir}/{file}", s3_destination], check=True
-            )
-            subprocess.run(
-                ["s3cmd", "setacl", f"{s3_destination}{file}", "--acl-public"],
-                check=True,
-            )
-    else:
-        logger.info("Skipping upload to S3")
 
 
 def run_all(
