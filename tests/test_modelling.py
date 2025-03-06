@@ -1,4 +1,4 @@
-from iati_tables import path_info, traverse_object
+from iati_tables.modelling import path_info, traverse_object
 
 
 def test_traverse_object_strings():
