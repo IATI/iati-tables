@@ -41,7 +41,9 @@ def assert_table_contents(table_name: str, expected_rows: list[dict[str, Any]]) 
             len(actual) == expected_count
         ), f"Expected there to be {expected_count} rows in {table_name} table"
         diff = DeepDiff(actual, expected_rows, ignore_order=True)
-        assert diff == {}
+        assert (
+            diff == {}
+        ), f"Differences between expected and actual:\n{json.dumps(diff, default=str, indent=4)}"
 
 
 def test_activity() -> None:
