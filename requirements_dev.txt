@@ -35,6 +35,8 @@ configparser==6.0.0
     # via iatikit
 cssselect==1.2.0
     # via types-lxml
+deepdiff==8.3.0
+    # via iati-tables (pyproject.toml)
 docutils==0.20.1
     # via
     #   sphinx
@@ -104,6 +106,8 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
+orderly-set==5.3.0
+    # via deepdiff
 packaging==23.2
     # via
     #   black

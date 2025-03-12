@@ -23,6 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "black",
+  "deepdiff",
   "flake8",
   "Flake8-pyproject",
   "iati-sphinx-theme",
