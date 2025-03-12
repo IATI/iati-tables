@@ -30,6 +30,7 @@ dev = [
   "isort",
   "mypy",
   "pytest",
+  "pytest-cov",
   "pytest-mock",
   "sphinx",
   "sphinx-togglebutton",

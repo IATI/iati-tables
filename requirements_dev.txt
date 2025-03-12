@@ -33,6 +33,8 @@ colorama==0.4.6
     # via sphinx-autobuild
 configparser==6.0.0
     # via iatikit
+coverage==7.7.0
+    # via pytest-cov
 cssselect==1.2.0
     # via types-lxml
 deepdiff==8.3.0
@@ -141,7 +143,10 @@ pygments==2.17.2
 pytest==7.4.4
     # via
     #   iati-tables (pyproject.toml)
+    #   pytest-cov
     #   pytest-mock
+pytest-cov==6.0.0
+    # via iati-tables (pyproject.toml)
 pytest-mock==3.14.0
     # via iati-tables (pyproject.toml)
 python-dateutil==2.8.2
@@ -201,6 +206,7 @@ sqlalchemy==2.0.31
 tomli==2.2.1
     # via
     #   black
+    #   coverage
     #   flake8-pyproject
     #   mypy
     #   pytest
