@@ -94,6 +94,14 @@ pytest
 docker compose -f tests/docker-compose.yml down
 ```
 
+To run pytest with coverage, use the following command:
+
+```
+pytest --cov --cov-report=html:coverage
+```
+
+Then open `coverage/index.html` in your browser to view results.
+
 ## How to run the web front-end
 
 ### Prerequisites:
