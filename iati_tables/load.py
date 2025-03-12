@@ -197,7 +197,7 @@ def load_dataset(dataset: iatikit.Dataset) -> None:
     engine.dispose()
 
 
-def load(processes: int, sample: Optional[int] = None) -> None:
+def load_datasets(processes: int, sample: Optional[int] = None) -> None:
     create_database_schema()
     create_raw_tables()
 
