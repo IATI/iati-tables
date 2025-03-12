@@ -75,13 +75,13 @@ Parameters:
 - `sample` (`int`, default=`None`): The number of datasets to process. This is useful for local development because processing the entire data dump can take several hours to run. A minimum sample size of 50 is recommended due to needing enough data to dynamically create all required tables (see https://github.com/codeforIATI/iati-tables/issues/10).
 - `refresh` (`bool`, default=`True`): Whether to download the latest data at the start of the processing job. It is useful to set this to `False` when running locally to avoid re-downloading the data every time the process is run.
 
-## How to run linting and formating
+## How to run linting and formatting
 
 ```
-isort iati_tables/
-black iati_tables/
-flake8 iati_tables/
-mypy iati_tables/
+isort iati_tables/ tests/
+black iati_tables/ tests/
+flake8 iati_tables/ tests/
+mypy iati_tables/ tests/
 ```
 
 ## How to run unit tests

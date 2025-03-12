@@ -14,12 +14,12 @@ jobs:
       - name: Install local package
         run: pip install .
       - name: Check isort
-        run: isort --check-only iati_tables/
+        run: isort --check-only iati_tables/ tests/
       - name: Check black
-        run: black --check iati_tables/
+        run: black --check iati_tables/ tests/
       - name: Check flake8
-        run: flake8 iati_tables/
+        run: flake8 iati_tables/ tests/
       - name: Check types with mypy
-        run: mypy iati_tables/
+        run: mypy iati_tables/ tests/
       - name: Run unit tests
         run: pytest
