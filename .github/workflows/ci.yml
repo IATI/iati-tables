@@ -21,5 +21,9 @@ jobs:
         run: flake8 iati_tables/ tests/
       - name: Check types with mypy
         run: mypy iati_tables/ tests/
-      - name: Run unit tests
+      - name: Spin up test database
+        run: docker compose -f tests/docker-compose.yml up -d --wait
+      - name: Run unit and integration tests
         run: pytest
+      - name: Tear down test database
+        run: docker compose -f tests/docker-compose.yml down

@@ -10,7 +10,7 @@ The processing job is a Python application which downloads the data from the [IA
 
 ### Prerequisites
 
-- postgresql
+- postgresql 14
 - sqlite
 - zip
 
@@ -84,10 +84,14 @@ flake8 iati_tables/ tests/
 mypy iati_tables/ tests/
 ```
 
-## How to run unit tests
+## Run unit and integration tests
+
+In one terminal:
 
 ```
+docker compose -f tests/docker-compose.yml up -d --wait
 pytest
+docker compose -f tests/docker-compose.yml down
 ```
 
 ## How to run the web front-end
