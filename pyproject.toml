@@ -23,6 +23,7 @@ dependencies = [
 dev = [
   "black",
   "flake8",
+  "Flake8-pyproject",
   "isort",
   "mypy",
   "pytest",
@@ -34,3 +35,13 @@ dev = [
   "types-requests",
   "types-lxml",
 ]
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 119
+
+[[tool.mypy.overrides]]
+module = ["iatikit.*", "sqlalchemy.*", "google.oauth2.*"]
+ignore_missing_imports = true
