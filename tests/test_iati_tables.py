@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from lxml import etree
 
-from iatidata import path_info, sort_iati_element, traverse_object
+from iati_tables import path_info, sort_iati_element, traverse_object
 
 
 def test_sort_iati_element():

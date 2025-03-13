@@ -1,0 +1,47 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "iati-tables"
+description = "IATI Tables"
+version = "1.0.0"
+readme = "README.md"
+dependencies = [
+  "boto3",
+  "click",
+  "fastavro",
+  "google-cloud-bigquery",
+  "iatikit",
+  "lxml",
+  "psycopg2-binary",
+  "sqlalchemy",
+  "xmlschema",
+]
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "flake8",
+  "Flake8-pyproject",
+  "isort",
+  "mypy",
+  "pytest",
+  "sphinx",
+  "sphinx-togglebutton",
+  "sphinx-intl",
+  "sphinx_rtd_theme",
+  "sphinx-autobuild",
+  "types-requests",
+  "types-lxml",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 119
+
+[[tool.mypy.overrides]]
+module = ["iatikit.*", "sqlalchemy.*", "google.oauth2.*"]
+ignore_missing_imports = true
