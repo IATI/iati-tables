@@ -15,6 +15,7 @@ dependencies = [
   "iatikit",
   "lxml",
   "psycopg2-binary",
+  "python-dotenv",
   "sqlalchemy",
   "xmlschema",
 ]
@@ -27,6 +28,7 @@ dev = [
   "isort",
   "mypy",
   "pytest",
+  "pytest-mock",
   "sphinx",
   "sphinx-togglebutton",
   "sphinx-intl",
@@ -45,3 +47,7 @@ max-line-length = 119
 [[tool.mypy.overrides]]
 module = ["iatikit.*", "sqlalchemy.*", "google.oauth2.*"]
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"

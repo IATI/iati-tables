@@ -72,6 +72,8 @@ python-dateutil==2.8.2
     # via
     #   botocore
     #   google-cloud-bigquery
+python-dotenv==1.0.1
+    # via iati-tables (pyproject.toml)
 requests==2.31.0
     # via
     #   google-api-core

@@ -7,6 +7,7 @@ from datetime import datetime
 from io import StringIO
 from typing import Any, Iterator
 
+import iatikit
 import requests
 from sqlalchemy import column, insert, table, text
 
@@ -453,12 +454,6 @@ def schema_analysis():
     )
 
 
-def get_data_dump_updated_at() -> datetime:
-    with open(f"{pathlib.Path()}/__iatikitcache__/registry/metadata.json") as f:
-        metadata = json.load(f)
-        return datetime.strptime(metadata.get("updated_at"), "%Y-%m-%dT%H:%M:%SZ")
-
-
 def postgres_tables(drop_release_objects=False):
     logger.info("Creating postgres tables")
     object_details = defaultdict(list)
@@ -497,7 +492,7 @@ def postgres_tables(drop_release_objects=False):
                 """
             ),
             {
-                "data_dump_updated_at": get_data_dump_updated_at().isoformat(
+                "data_dump_updated_at": iatikit.data().last_updated.isoformat(
                     sep=" ", timespec="seconds"
                 ),
                 "iati_tables_updated_at": datetime.utcnow().isoformat(
