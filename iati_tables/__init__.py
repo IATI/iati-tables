@@ -29,7 +29,7 @@ from google.oauth2 import service_account
 from lxml import etree
 from sqlalchemy import Engine, column, create_engine, insert, table, text
 
-from iatidata import sort_iati
+from iati_tables import sort_iati
 
 logging.basicConfig(
     level=logging.INFO,

@@ -1,0 +1,25 @@
+name: CI
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install requirements_dev.txt
+        run: pip install -r requirements_dev.txt
+      - name: Install local package
+        run: pip install .
+      - name: Check isort
+        run: isort --check-only iati_tables/
+      - name: Check black
+        run: black --check iati_tables/
+      - name: Check flake8
+        run: flake8 iati_tables/
+      - name: Check types with mypy
+        run: mypy iati_tables/
+      - name: Run unit tests
+        run: pytest
