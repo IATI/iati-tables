@@ -11,6 +11,7 @@ __iatikitcache__/
 __pycache__
 docs/_build
 .~lock*
+.env.local
 
 # Output data
 activities.json.gz
