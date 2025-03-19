@@ -139,6 +139,7 @@ html_css_files = [
 html_theme_options = {
     "github_repository": "https://github.com/IATI/iati-tables",
     "header_title_text": "IATI Tables",
+    "plausible_domain": "tables.iatistandard.org",
     "tool_name": "IATI Tables",
     "tool_url": "https://tables.iatistandard.org/",
 }

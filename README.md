@@ -2,7 +2,7 @@
 
 IATI Tables transforms IATI data into relational tables.
 
-To access the data please go to the [website](https://iati-tables.codeforiati.org/) and for more information on how to use the data please see the [documentation site](https://iati-tables.readthedocs.io/en/latest/).
+To access the data please go to the [website](https://iati-tables.codeforiati.org/) and for more information on how to use the data please see the [documentation site](https://docs.tables.iatistandard.org/).
 
 ## How to run the processing job
 
