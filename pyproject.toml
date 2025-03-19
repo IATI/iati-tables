@@ -25,6 +25,7 @@ dev = [
   "black",
   "flake8",
   "Flake8-pyproject",
+  "iati-sphinx-theme",
   "isort",
   "mypy",
   "pytest",
