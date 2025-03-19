@@ -23,12 +23,14 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "black",
+  "deepdiff",
   "flake8",
   "Flake8-pyproject",
   "iati-sphinx-theme",
   "isort",
   "mypy",
   "pytest",
+  "pytest-cov",
   "pytest-mock",
   "sphinx",
   "sphinx-togglebutton",
