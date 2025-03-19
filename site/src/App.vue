@@ -7,4 +7,11 @@
 </template>
 
 <style>
+html {
+  -webkit-font-smoothing: auto !important;
+
+  .v-application {
+    -webkit-font-smoothing: antialiased;
+  }
+}
 </style>
