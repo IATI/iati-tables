@@ -1,9 +1,5 @@
 <template>
   <v-app>
-    <v-app-bar v-if="false" app>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </v-app-bar>
     <v-main>
       <router-view/>
     </v-main>
@@ -11,4 +7,11 @@
 </template>
 
 <style>
+html {
+  -webkit-font-smoothing: auto !important;
+
+  .v-application {
+    -webkit-font-smoothing: antialiased;
+  }
+}
 </style>
