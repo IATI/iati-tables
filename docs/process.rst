@@ -97,7 +97,12 @@ This element will be transformed into two columns in the :code:`activity` table:
 Currency Conversion
 -------------------
 
-.. TODO: https://github.com/codeforIATI/imf-exchangerates
+IATI Tables converts the :iati-reference:`iati-activities/iati-activity/transaction/value` element to USD.
+
+This is calculated by pulling the `Code for IATI IMF exchange rates dataset <https://github.com/codeforIATI/imf-exchangerates>`_,
+and using the transaction's :code:`@value-date` attribute to determine the exchange rate to use.
+
+The result is stored in the transaction (:code:`trans`) table in a new column :code:`value_usd`.
 
 Transaction Breakdown
 ---------------------
