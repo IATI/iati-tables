@@ -104,7 +104,9 @@ and using the transaction's :code:`@value-date` attribute to determine the excha
 
 The result is stored in the transaction (:code:`trans`) table in a new column :code:`value_usd`.
 
-Transaction Breakdown
+Transaction Splitting
 ---------------------
 
-.. TODO: https://countrydata.iatistandard.org/methodology/#24-splitting-transactions-for-multiple-sectors-and-countries
+IATI Tables transforms the :code:`transaction` (:code:`trans`) table to proportionally split the transaction values across multiple sectors or countries/regions.
+
+It follows the same methodology set out in the `CDFD documentation <https://countrydata.iatistandard.org/methodology/#24-splitting-transactions-for-multiple-sectors-and-countries>`_.
