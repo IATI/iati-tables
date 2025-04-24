@@ -72,9 +72,9 @@ def test_activity() -> None:
                 "title_narrative": "Activity title, FR: Titre de l'activit\u00e9, ES: T\u00edtulo de la actividad",
                 "activitystatus_code": "2",
                 "activitystatus_codename": "Implementation",
-                "plannedstart": datetime.datetime(2012, 4, 15),
-                "actualstart": datetime.datetime(2012, 4, 28),
-                "plannedend": datetime.datetime(2015, 12, 31),
+                "plannedstart": datetime.date(2012, 4, 15),
+                "actualstart": datetime.date(2012, 4, 28),
+                "plannedend": datetime.date(2015, 12, 31),
                 "activityscope_code": "3",
                 "activityscope_codename": "Multi-national",
                 "countrybudgetitems_vocabulary": "4",
@@ -93,24 +93,22 @@ def test_activity() -> None:
                 "crsadd_loanterms_rate2": Decimal(3.0),
                 "crsadd_loanterms_repaymenttype_code": "1",
                 "crsadd_loanterms_repaymentplan_code": "4",
-                "crsadd_loanterms_commitmentdate_isodate": datetime.datetime(
-                    2013, 9, 1
-                ),
-                "crsadd_loanterms_repaymentfirstdate_isodate": datetime.datetime(
+                "crsadd_loanterms_commitmentdate_isodate": datetime.date(2013, 9, 1),
+                "crsadd_loanterms_repaymentfirstdate_isodate": datetime.date(
                     2014, 1, 1
                 ),
-                "crsadd_loanterms_repaymentfinaldate_isodate": datetime.datetime(
+                "crsadd_loanterms_repaymentfinaldate_isodate": datetime.date(
                     2020, 12, 31
                 ),
                 "crsadd_loanstatus_year": Decimal(2014.0),
                 "crsadd_loanstatus_currency": "GBP",
-                "crsadd_loanstatus_valuedate": datetime.datetime(2013, 5, 24),
+                "crsadd_loanstatus_valuedate": datetime.date(2013, 5, 24),
                 "crsadd_loanstatus_interestreceived": Decimal(200000.0),
                 "crsadd_loanstatus_principaloutstanding": Decimal(1500000.0),
                 "crsadd_loanstatus_principalarrears": Decimal(0.0),
                 "crsadd_loanstatus_interestarrears": Decimal(0.0),
                 "crsadd_channelcode": "21039",
-                "fss_extractiondate": datetime.datetime(2014, 5, 6),
+                "fss_extractiondate": datetime.date(2014, 5, 6),
                 "fss_priority": True,
                 "fss_phaseoutyear": Decimal(2016.0),
             },

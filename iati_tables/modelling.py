@@ -315,7 +315,8 @@ def get_schema_docs():
     return schema_docs_lookup
 
 
-DATE_RE = r"^(\d{4})-(\d{2})-(\d{2})([T ](\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?))?$"
+DATE_RE = r"^(\d{4})-(\d{2})-(\d{2})$"
+DATETIME_RE = r"^(\d{4})-(\d{2})-(\d{2})([T ](\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?))?$"
 
 
 def schema_analysis():
@@ -329,6 +330,8 @@ def schema_analysis():
                  WHEN jsonb_typeof(value) != 'string'
                      THEN jsonb_typeof(value)
                  WHEN (value ->> 0) ~ '{DATE_RE}'
+                     THEN 'date'
+                 WHEN (value ->> 0) ~ '{DATETIME_RE}'
                      THEN 'datetime'
                  ELSE 'string'
               END value_type,
