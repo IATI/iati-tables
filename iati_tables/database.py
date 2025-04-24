@@ -39,6 +39,8 @@ def create_field_sql(object_details, sqlite=False):
             field = f'"{name}" JSONB'
         elif type == "boolean":
             field = f'"{name}" boolean'
+        elif type == "date":
+            field = f'"{name}" date'
         elif type == "datetime":
             field = f'"{name}" timestamp'
         else:
