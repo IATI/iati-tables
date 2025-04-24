@@ -140,6 +140,7 @@ html_theme_options = {
     "github_repository": "https://github.com/IATI/iati-tables",
     "header_title_text": "IATI Tables",
     "plausible_domain": "tables.iatistandard.org",
+    "project_title": "IATI Tables: Documentation",
     "tool_nav_items": {
         "IATI Tables": "https://tables.iatistandard.org/"
     },
