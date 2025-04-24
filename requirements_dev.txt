@@ -74,7 +74,7 @@ google-resumable-media==2.7.0
     # via google-cloud-bigquery
 googleapis-common-protos==1.62.0
     # via google-api-core
-iati-sphinx-theme==1.11.0
+iati-sphinx-theme==2.1.0
     # via iati-tables (pyproject.toml)
 iatikit==3.4.0
     # via iati-tables (pyproject.toml)

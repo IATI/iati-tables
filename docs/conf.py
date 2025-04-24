@@ -55,7 +55,7 @@ source_suffix = [".rst", ".md"]
 master_doc = "index"
 
 # General information about the project.
-project = "IATI Tables Docs"
+project = "IATI Tables: Documentation"
 copyright = "Copyright (c) 2021-2024 Open Data Services Co-operative Limited"
 author = "Open Data Services"
 
@@ -140,8 +140,9 @@ html_theme_options = {
     "github_repository": "https://github.com/IATI/iati-tables",
     "header_title_text": "IATI Tables",
     "plausible_domain": "tables.iatistandard.org",
-    "tool_name": "IATI Tables",
-    "tool_url": "https://tables.iatistandard.org/",
+    "tool_nav_items": {
+        "IATI Tables": "https://tables.iatistandard.org/"
+    },
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
