@@ -18,6 +18,9 @@ dependencies = [
   "python-dotenv",
   "sqlalchemy",
   "xmlschema",
+  "datasette==0.64.5",
+  "datasette-vega==0.6.2",
+  "datasette-block-robots==1.1"
 ]
 
 [project.optional-dependencies]

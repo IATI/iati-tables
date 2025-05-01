@@ -4,8 +4,16 @@
 #
 #    pip-compile --extra=dev --output-file=requirements_dev.txt --strip-extras pyproject.toml
 #
+aiofiles==24.1.0
+    # via datasette
 alabaster==0.7.16
     # via sphinx
+anyio==4.9.0
+    # via httpx
+asgi-csrf==0.11
+    # via datasette
+asgiref==3.8.1
+    # via datasette
 babel==2.14.0
     # via
     #   sphinx
@@ -21,14 +29,22 @@ botocore==1.34.19
 cachetools==5.3.2
     # via google-auth
 certifi==2023.11.17
-    # via requests
+    # via
+    #   httpcore
+    #   httpx
+    #   requests
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via
     #   black
+    #   click-default-group
+    #   datasette
     #   iati-tables (pyproject.toml)
     #   sphinx-intl
+    #   uvicorn
+click-default-group==1.2.4
+    # via datasette
 colorama==0.4.6
     # via sphinx-autobuild
 configparser==6.0.0
@@ -37,6 +53,15 @@ coverage==7.7.0
     # via pytest-cov
 cssselect==1.2.0
     # via types-lxml
+datasette==0.64.5
+    # via
+    #   datasette-block-robots
+    #   datasette-vega
+    #   iati-tables (pyproject.toml)
+datasette-block-robots==1.1
+    # via iati-tables (pyproject.toml)
+datasette-vega==0.6.2
+    # via iati-tables (pyproject.toml)
 deepdiff==8.3.0
     # via iati-tables (pyproject.toml)
 docutils==0.20.1
@@ -47,7 +72,9 @@ docutils==0.20.1
 elementpath==4.1.5
     # via xmlschema
 exceptiongroup==1.2.2
-    # via pytest
+    # via
+    #   anyio
+    #   pytest
 fastavro==1.9.3
     # via iati-tables (pyproject.toml)
 flake8==7.0.0
@@ -56,6 +83,10 @@ flake8==7.0.0
     #   iati-tables (pyproject.toml)
 flake8-pyproject==1.2.3
     # via iati-tables (pyproject.toml)
+flexcache==0.3
+    # via pint
+flexparser==0.4
+    # via pint
 google-api-core==2.15.0
     # via
     #   google-cloud-bigquery
@@ -74,20 +105,43 @@ google-resumable-media==2.7.0
     # via google-cloud-bigquery
 googleapis-common-protos==1.62.0
     # via google-api-core
+greenlet==3.2.1
+    # via sqlalchemy
+h11==0.16.0
+    # via
+    #   httpcore
+    #   uvicorn
+httpcore==1.0.9
+    # via httpx
+httpx==0.28.1
+    # via datasette
+hupper==1.12.1
+    # via datasette
 iati-sphinx-theme==3.0.0
     # via iati-tables (pyproject.toml)
 iatikit==3.4.0
     # via iati-tables (pyproject.toml)
 idna==3.6
-    # via requests
+    # via
+    #   anyio
+    #   httpx
+    #   requests
 imagesize==1.4.1
     # via sphinx
 iniconfig==2.0.0
     # via pytest
 isort==5.13.2
     # via iati-tables (pyproject.toml)
+itsdangerous==2.2.0
+    # via
+    #   asgi-csrf
+    #   datasette
+janus==2.0.0
+    # via datasette
 jinja2==3.1.3
-    # via sphinx
+    # via
+    #   datasette
+    #   sphinx
 jmespath==1.0.1
     # via
     #   boto3
@@ -102,6 +156,8 @@ markupsafe==2.1.5
     # via jinja2
 mccabe==0.7.0
     # via flake8
+mergedeep==1.3.4
+    # via datasette
 mypy==1.8.0
     # via iati-tables (pyproject.toml)
 mypy-extensions==1.0.0
@@ -118,10 +174,16 @@ packaging==23.2
     #   sphinx
 pathspec==0.12.1
     # via black
+pint==0.24.4
+    # via datasette
 platformdirs==4.1.0
-    # via black
+    # via
+    #   black
+    #   pint
 pluggy==1.4.0
-    # via pytest
+    # via
+    #   datasette
+    #   pytest
 protobuf==4.25.2
     # via
     #   google-api-core
@@ -155,6 +217,10 @@ python-dateutil==2.8.2
     #   google-cloud-bigquery
 python-dotenv==1.0.1
     # via iati-tables (pyproject.toml)
+python-multipart==0.0.20
+    # via asgi-csrf
+pyyaml==6.0.2
+    # via datasette
 requests==2.31.0
     # via
     #   google-api-core
@@ -169,6 +235,8 @@ six==1.16.0
     # via
     #   livereload
     #   python-dateutil
+sniffio==1.3.1
+    # via anyio
 snowballstemmer==2.2.0
     # via sphinx
 sphinx==7.2.6
@@ -222,19 +290,28 @@ types-requests==2.31.0.20240125
     # via iati-tables (pyproject.toml)
 typing-extensions==4.12.2
     # via
+    #   anyio
+    #   asgiref
     #   black
+    #   flexcache
+    #   flexparser
     #   mypy
+    #   pint
     #   sqlalchemy
     #   types-lxml
+    #   uvicorn
 urllib3==2.0.7
     # via
     #   botocore
     #   requests
     #   types-requests
+uvicorn==0.34.2
+    # via datasette
 wheel==0.42.0
     # via sphinx-togglebutton
 xmlschema==3.0.1
     # via iati-tables (pyproject.toml)
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip
 # setuptools
