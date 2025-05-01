@@ -26,3 +26,7 @@ iati.sqlite.zip
 stats.json
 profiles/
 logs/
+
+# datasette
+/datasette/templates/base.html
+

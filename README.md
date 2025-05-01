@@ -141,3 +141,25 @@ The documentation site is built with Sphinx. To view the live preview locally, r
 ```
 sphinx-autobuild docs docs/_build/html
 ```
+
+# How to run Datasette
+
+You need a SQLite database with the name `iati.sqlite`. Either: 
+
+* Download a real one from tables
+* Run the pipeline locally in sample mode
+* Run `sqlite3 iati.sqlite "CREATE TABLE nodatayet(id INTEGER)"`
+
+To run datasette as a local server, run:
+
+    cp datasette/templates/base.template.html datasette/templates/base.html
+    datasette -i iati.sqlite --template-dir=datasette/templates
+
+## Why base.template.html?
+
+On the server our deploy scripts will copy base.template.html to base.html and then edit TABLES.DOMAIN.EXAMPLE.COM to the real domain.
+
+This makes sure we set the domain correctly on the live server and any test servers and that we don't mix dev traffic in with live.
+
+
+
