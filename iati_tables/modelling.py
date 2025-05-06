@@ -70,6 +70,7 @@ def traverse_object(
         key = original_key.replace("-", "")
 
         if key == "narrative":
+            # Old narrative format, kept for backwards compatibility reasons
             narratives = []
             for narrative in value:
                 if not narrative:
@@ -82,6 +83,20 @@ def traverse_object(
                     narrative = f"{lang.upper()}: {narrative.get('$', '')}"
                 narratives.append(narrative)
             obj["narrative"] = ", ".join(narratives)
+            # But also keep processing, so we get nice narrative tables too.
+            # https://github.com/IATI/iati-tables/issues/79
+            if isinstance(value, list):
+                for num, item in enumerate(value):
+                    # In this case there could be mixed strings and dicts in this list
+                    # (so we aren't just reusing the code below)
+                    if isinstance(item, dict):
+                        yield from traverse_object(
+                            item, True, full_path + (key, num), no_index_path + (key,)
+                        )
+                    elif isinstance(item, str):
+                        yield {"$": item}, full_path + (key, num), no_index_path + (
+                            key,
+                        )
         elif isinstance(value, list) and value and isinstance(value[0], dict):
             for num, item in enumerate(value):
                 if not isinstance(item, dict):
