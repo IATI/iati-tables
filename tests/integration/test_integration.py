@@ -155,3 +155,77 @@ def test_description():
             },
         ],
     )
+
+
+def test_description_narrative():
+    assert_table_contents(
+        "description_narrative",
+        expected_rows=[
+            {
+                "dataset": "test_activity",
+                "_link": "1.description.0.narrative.0",
+                "_link_activity": "1",
+                "_link_description": "1.description.0",
+                "prefix": "test_prefix",
+                "iatiidentifier": "AA-AAA-123456789-ABC123",
+                "reportingorg_ref": "AA-AAA-123456789",
+                "_": "General activity description text. Long description of the activity with no\n        particular structure.",  # noqa: E501
+                "lang": None,
+            },
+            {
+                "dataset": "test_activity",
+                "_link": "1.description.0.narrative.1",
+                "_link_activity": "1",
+                "_link_description": "1.description.0",
+                "prefix": "test_prefix",
+                "iatiidentifier": "AA-AAA-123456789-ABC123",
+                "reportingorg_ref": "AA-AAA-123456789",
+                "_": "Activité générale du texte de description. Longue description de\n        l'activité sans structure particulière.",  # noqa: E501
+                "lang": "fr",
+            },
+            {
+                "dataset": "test_activity",
+                "_link": "1.description.1.narrative.0",
+                "_link_activity": "1",
+                "_link_description": "1.description.1",
+                "prefix": "test_prefix",
+                "iatiidentifier": "AA-AAA-123456789-ABC123",
+                "reportingorg_ref": "AA-AAA-123456789",
+                "_": "Objectives for the activity, for example from a logical framework.",
+                "lang": None,
+            },
+            {
+                "dataset": "test_activity",
+                "_link": "1.description.1.narrative.1",
+                "_link_activity": "1",
+                "_link_description": "1.description.1",
+                "prefix": "test_prefix",
+                "iatiidentifier": "AA-AAA-123456789-ABC123",
+                "reportingorg_ref": "AA-AAA-123456789",
+                "_": "Objectifs de l'activité, par exemple à partir d'un cadre logique.",
+                "lang": "fr",
+            },
+            {
+                "dataset": "test_activity",
+                "_link": "1.description.2.narrative.0",
+                "_link_activity": "1",
+                "_link_description": "1.description.2",
+                "prefix": "test_prefix",
+                "iatiidentifier": "AA-AAA-123456789-ABC123",
+                "reportingorg_ref": "AA-AAA-123456789",
+                "_": "Statement of groups targeted to benefit from the activity.",
+                "lang": None,
+            },
+            {
+                "dataset": "test_activity",
+                "_link": "1.description.2.narrative.1",
+                "_link_activity": "1",
+                "_link_description": "1.description.2",
+                "prefix": "test_prefix",
+                "iatiidentifier": "AA-AAA-123456789-ABC123",
+                "reportingorg_ref": "AA-AAA-123456789",
+                "_": "Déclaration de groupes ciblés pour bénéficier de l'activité.",
+                "lang": "fr",
+            },
+        ],
+    )
