@@ -153,7 +153,7 @@ You need a SQLite database with the name `iati.sqlite`. Either:
 To run datasette as a local server, run:
 
     cp datasette/templates/base.template.html datasette/templates/base.html
-    datasette -i iati.sqlite --template-dir=datasette/templates
+    datasette -i iati.sqlite --template-dir=datasette/templates --static iatistatic:datasette/static
 
 ## Why base.template.html?
 
