@@ -43,6 +43,13 @@ def test_traverse_object_narratives_plain():
     expected_result = [
         (
             {
+                "$": "Title narrative",
+            },
+            ("title", "narrative", 0),
+            ("title", "narrative"),
+        ),
+        (
+            {
                 "title": {"narrative": "Title narrative"},
             },
             (),
@@ -65,6 +72,14 @@ def test_traverse_object_narratives_with_language():
     }
     result = list(traverse_object(activity_object, True))
     expected_result = [
+        (
+            {
+                "$": "Title narrative",
+                "@{http://www.w3.org/XML/1998/namespace}lang": "en",
+            },
+            ("title", "narrative", 0),
+            ("title", "narrative"),
+        ),
         (
             {
                 "title": {"narrative": "EN: Title narrative"},
@@ -100,6 +115,11 @@ def test_traverse_object_lists_of_dicts():
     result = list(traverse_object(activity_object, True))
     expected_result = [
         (
+            {"$": "Transaction 0 description narrative"},
+            ("transaction", 0, "description", "narrative", 0),
+            ("transaction", "description", "narrative"),
+        ),
+        (
             {
                 "value": {
                     "$": 2000000.0,
@@ -110,6 +130,11 @@ def test_traverse_object_lists_of_dicts():
             },
             ("transaction", 0),
             ("transaction",),
+        ),
+        (
+            {"$": "Transaction 1 description narrative"},
+            ("transaction", 1, "description", "narrative", 0),
+            ("transaction", "description", "narrative"),
         ),
         (
             {
