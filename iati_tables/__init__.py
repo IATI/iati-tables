@@ -26,10 +26,14 @@ load_dotenv(find_dotenv(f".env.{APP_ENV}", usecwd=True))
 
 
 def run_all(
-    sample: Optional[int] = None, refresh: bool = True, processes: int = 5
+    sample: Optional[int] = None,
+    refresh: bool = True,
+    refresh_standard: bool = False,
+    refresh_registry: bool = False,
+    processes: int = 5,
 ) -> None:
-    download_standard(refresh=refresh)
-    download_registry(refresh=refresh)
+    download_standard(refresh=(refresh_standard or refresh))
+    download_registry(refresh=(refresh_registry or refresh))
     load_datasets(processes=processes, sample=sample)
     process_registry()
     export_all()
