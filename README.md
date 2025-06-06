@@ -66,14 +66,20 @@ The processing job can be configured using the following environment variables:
 ### Run the processing job
 
 ```
-python -c 'import iati_tables; iati_tables.run_all(processes=6, sample=50, refresh=False)'
+python -c 'import iati_tables; iati_tables.run_all(processes=6, sample=50, refresh=False, refresh_standard=False, refresh_registry=False)'
 ```
 
 Parameters:
 
 - `processes` (`int`, default=`5`): The number of workers to use for parts of the process which are able to run in parallel.
 - `sample` (`int`, default=`None`): The number of datasets to process. This is useful for local development because processing the entire data dump can take several hours to run. A minimum sample size of 50 is recommended due to needing enough data to dynamically create all required tables (see https://github.com/codeforIATI/iati-tables/issues/10).
-- `refresh` (`bool`, default=`True`): Whether to download the latest data at the start of the processing job. It is useful to set this to `False` when running locally to avoid re-downloading the data every time the process is run.
+
+These parameters are useful when running locally to avoid re-downloading the standard and registry data every time the process is run
+
+- `refresh` (`bool`, default=`True`): Whether to download all the latest data at the start of the processing job.
+- `refresh_standard` (`bool`, default=`False`): Whether to download the latest standard information at the start of the processing job (eg schemas, codelists). Will happen anyway if `refresh` is `True`, but defaults to `False` for backward compatability reasons.
+- `refresh_registry` (`bool`, default=`False`): Whether to download the latest data from the registry at the start of the processing job. Will happen anyway if `refresh` is `True`, but defaults to `False` for backward compatability reasons.
+
 
 ## How to run linting and formatting
 
