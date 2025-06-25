@@ -4,52 +4,39 @@ IATI Tables transforms IATI data into relational tables.
 
 To access the data please go to the [website](https://iati-tables.codeforiati.org/) and for more information on how to use the data please see the [documentation site](https://docs.tables.iatistandard.org/).
 
+## Dev work with Docker
+
+### Prerequisites
+
+- Docker & Docker Compose
+
+### To Setup
+
+```
+docker compose -f docker-compose.dev.yml build
+```
+
+### To Run
+
+To start:
+
+```
+docker compose -f docker-compose.dev.yml up
+```
+
+To connect inside container:
+
+```
+docker compose -f docker-compose.dev.yml exec app bash
+```
+
 ## How to run the processing job
 
 The processing job is a Python application which downloads the data from the [IATI Data Dump](https://iati-data-dump.codeforiati.org/), transforms the data into tables, and outputs the data in various formats such as CSV, PostgreSQL and SQLite. It is a batch job, designed to be run on a schedule.
 
-### Prerequisites
-
-- postgresql 14
-- sqlite
-- zip
-
-### Install Python requirements
-
-```
-python3 -m venv .ve
-source .ve/bin/activate
-pip install pip-tools
-pip-sync requirements_dev.txt
-```
-
-### Set up the PostgreSQL database
-
-Create user `iatitables`:
-
-```
-sudo -u postgres psql -c "create user iatitables with password 'PASSWORD_CHANGEME'"
-```
-
-Create database `iatitables`
-
-```
-sudo -u postgres psql -c "create database iatitables encoding utf8 owner iatitables"
-```
-
-Set `DATABASE_URL` environment variable
-
-```
-export DATABASE_URL="postgresql://iatitables:PASSWORD_CHANGEME@localhost/iatitables"
-```
-
 ### Configure the processing job
 
 The processing job can be configured using the following environment variables:
-
-`DATABASE_URL` (Required)
-
-- The postgres database to use for the processing job.
 
 `IATI_TABLES_OUTPUT` (Optional)
 
@@ -66,7 +53,7 @@ The processing job can be configured using the following environment variables:
 ### Run the processing job
 
 ```
-python -c 'import iati_tables; iati_tables.run_all(processes=6, sample=50, refresh=False, refresh_standard=False, refresh_registry=False)'
+python3 -c 'import iati_tables; iati_tables.run_all(processes=6, sample=50, refresh=False, refresh_standard=False, refresh_registry=False)'
 ```
 
 Parameters:
@@ -92,27 +79,22 @@ mypy iati_tables/ tests/
 
 ## Run unit and integration tests
 
-In one terminal:
+Setup
 
 ```
-docker compose -f tests/docker-compose.yml up -d --wait
-pytest
-docker compose -f tests/docker-compose.yml down
+psql -c "CREATE DATABASE test;" postgresql://postgres:postgres@db/postgres
 ```
 
-To run pytest with coverage, use the following command:
+To run pytest without or with coverage, use the following command:
 
 ```
-pytest --cov --cov-report=html:coverage
+PYTHONPATH=/iatitables DATABASE_URL=postgresql://postgres:postgres@db/test pytest
+PYTHONPATH=/iatitables DATABASE_URL=postgresql://postgres:postgres@db/test pytest --cov --cov-report=html:coverage
 ```
 
 Then open `coverage/index.html` in your browser to view results.
 
 ## How to run the web front-end
-
-### Prerequisites:
-
-- Node.js v20
 
 Change the working directory:
 
@@ -145,7 +127,7 @@ python3 -m http.server --bind 127.0.0.1 8000
 The documentation site is built with Sphinx. To view the live preview locally, run the following command:
 
 ```
-sphinx-autobuild docs docs/_build/html
+sphinx-autobuild --host 0.0.0.0 docs docs/_build/html
 ```
 
 # How to run Datasette
@@ -159,7 +141,7 @@ You need a SQLite database with the name `iati.sqlite`. Either:
 To run datasette as a local server, run:
 
     cp datasette/templates/base.template.html datasette/templates/base.html
-    datasette -i iati.sqlite --template-dir=datasette/templates --static iatistatic:datasette/static
+    datasette --host 0.0.0.0 -i iati.sqlite --template-dir=datasette/templates --static iatistatic:datasette/static
 
 ## Why base.template.html?
 
