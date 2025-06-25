@@ -182,3 +182,62 @@ def test_path_info():
             "result_indicator_period": "result.12.indicator.3.period.0",
         },
     )
+
+
+def test_transaction_value_has_currency():
+    activity_object = {
+        "transaction": [
+            {
+                "value": {
+                    "$": 2000000.0,
+                    "@currency": "GBP",
+                    "@value-date": "2024-01-30",
+                }
+            }
+        ]
+    }
+    result = list(traverse_object(activity_object, True, filetype="activity"))
+    expected_result = [
+        (
+            {
+                "value": {
+                    "$": 2000000.0,
+                    "@currency": "GBP",
+                    "@value-date": "2024-01-30",
+                }
+            },
+            ("transaction", 0),
+            ("transaction",),
+        ),
+    ]
+    assert result == expected_result
+
+
+def test_transaction_value_uses_default_currency():
+    activity_object = {
+        "@default-currency": "GBP",
+        "transaction": [
+            {
+                "value": {
+                    "$": 2000000.0,
+                    "@value-date": "2024-01-30",
+                }
+            }
+        ],
+    }
+    result = list(traverse_object(activity_object, True, filetype="activity"))
+    expected_result = [
+        (
+            {
+                "value": {
+                    "$": 2000000.0,
+                    "@currency": "GBP",
+                    "@value-date": "2024-01-30",
+                }
+            },
+            ("transaction", 0),
+            ("transaction",),
+        ),
+        ({"@defaultcurrency": "GBP"}, (), ()),
+    ]
+    assert result == expected_result

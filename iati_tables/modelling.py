@@ -64,8 +64,16 @@ def get_codelists_lookup():
 
 
 def traverse_object(
-    obj: dict[str, Any], emit_object: bool, full_path=tuple(), no_index_path=tuple()
+    obj: dict[str, Any],
+    emit_object: bool,
+    full_path=tuple(),
+    no_index_path=tuple(),
+    parent_data=dict(),
+    filetype: str = "",
 ) -> Iterator[tuple[dict[str, Any], tuple[Any, ...], tuple[str, ...]]]:
+    if filetype == "activity" and len(full_path) == 0:
+        parent_data["default-currency"] = obj.get("@default-currency")
+
     for original_key, value in list(obj.items()):
         key = original_key.replace("-", "")
 
@@ -91,7 +99,12 @@ def traverse_object(
                     # (so we aren't just reusing the code below)
                     if isinstance(item, dict):
                         yield from traverse_object(
-                            item, True, full_path + (key, num), no_index_path + (key,)
+                            item,
+                            True,
+                            full_path + (key, num),
+                            no_index_path + (key,),
+                            parent_data,
+                            filetype,
                         )
                     elif isinstance(item, str):
                         yield {"$": item}, full_path + (key, num), no_index_path + (
@@ -102,7 +115,12 @@ def traverse_object(
                 if not isinstance(item, dict):
                     item = {"__error": "A non object is in array of objects"}
                 yield from traverse_object(
-                    item, True, full_path + (key, num), no_index_path + (key,)
+                    item,
+                    True,
+                    full_path + (key, num),
+                    no_index_path + (key,),
+                    parent_data,
+                    filetype,
                 )
             obj.pop(original_key)
         elif isinstance(value, list):
@@ -110,11 +128,29 @@ def traverse_object(
                 obj[key] = json.dumps(value)
         elif isinstance(value, dict):
             yield from traverse_object(
-                value, False, full_path + (key,), no_index_path + (key,)
+                value,
+                False,
+                full_path + (key,),
+                no_index_path + (key,),
+                parent_data,
+                filetype,
             )
 
     if obj and emit_object:
         new_object = {key.replace("-", ""): value for key, value in obj.items()}
+        if filetype == "activity" and no_index_path in [
+            ("transaction",),
+            ("budget",),
+            ("planned-disbursement",),
+        ]:
+            value = obj.get("value")
+            if (
+                isinstance(value, dict)
+                and "currency" not in value.keys()
+                and parent_data.get("default-currency")
+            ):
+                new_object["value"]["@currency"] = parent_data.get("default-currency")
+
         yield new_object, full_path, no_index_path
 
 
@@ -188,7 +224,9 @@ def create_rows(
     # get activity dates before traversal remove them
     activity_dates = original_object.get("activity-date", []) or []
 
-    for object, full_path, no_index_path in traverse_object(original_object, True):
+    for object, full_path, no_index_path in traverse_object(
+        original_object, True, filetype=filetype
+    ):
         (
             object_key,
             parent_keys_list,
