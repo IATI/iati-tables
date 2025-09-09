@@ -41,5 +41,5 @@ This option is more flexible if you want to perform any schema changes before re
 Colab Notebook
 ==============
 
-The `Google Colab <https://colab.google/>`_ notebook, shows some examples of how the data can be explored in Jupyter Notebook format.
+The `Google Colab <https://colab.research.google.com/drive/15Ahauin2YgloaFEwiGjqbnv7L91xNUua>`_ notebook, shows some examples of how the data can be explored in Jupyter Notebook format.
 You can save a copy of the notebook to edit it for your own use case.
