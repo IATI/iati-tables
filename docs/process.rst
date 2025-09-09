@@ -109,4 +109,4 @@ Transaction Splitting
 
 IATI Tables transforms the :code:`transaction` (:code:`trans`) table to proportionally split the transaction values across multiple sectors or countries/regions.
 
-It follows the same methodology set out in the `CDFD documentation <https://countrydata.iatistandard.org/methodology/#24-splitting-transactions-for-multiple-sectors-and-countries>`_.
+It follows the same methodology set out in the `CDFD documentation <https://docs.countrydata.iatistandard.org/en/latest/processing/#transaction-splitting>`_.
