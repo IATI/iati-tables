@@ -86,7 +86,7 @@ httpx==0.28.1
     # via datasette
 hupper==1.12.1
     # via datasette
-iatikit==3.5.0
+iatikit==3.6.1
     # via iati-tables (pyproject.toml)
 idna==3.6
     # via
