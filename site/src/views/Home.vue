@@ -21,14 +21,6 @@
               <v-col xl=9 lg=9 cols=12>
                 <v-chip
                   class="ml-3"
-                  color="grey darken-3"
-                  text-color="white"
-                  :href="colabUrl"
-                >
-                Colab Notebook
-                </v-chip>
-                <v-chip
-                  class="ml-3"
                   color="deep-purple darken-4"
                   text-color="white"
                   :href="dataUrl + '/iati.sqlite.zip'">
