@@ -4,6 +4,21 @@ IATI Tables transforms IATI data into relational tables.
 
 To access the data please go to the [website](https://iati-tables.codeforiati.org/) and for more information on how to use the data please see the [documentation site](https://docs.tables.iatistandard.org/).
 
+## Overview
+
+This IATI Tables repository holds 4 parts.
+
+The first part is the IATI Tables pipeline that downloads data, processes it in a Postgresql database and makes the resultant data available as files in several formats. 
+This is mainly in the `iati_tables` directory, with tests for it in the `tests` directory.
+
+The second part is the web front end that provides a static website on the front end to the user. This is in the `site` directory.
+
+The third part is some Datasette templates that are used to theme a Datasette instance. This is in the `datasette` directory.
+
+The fourth part is some docs for end users. These are in the `docs` directory and are provided at https://docs.tables.iatistandard.org/en/latest/
+
+More details on how to run each of these parts is below.
+
 ## Dev work with Docker
 
 ### Prerequisites
@@ -130,7 +145,7 @@ The documentation site is built with Sphinx. To view the live preview locally, r
 sphinx-autobuild --host 0.0.0.0 docs docs/_build/html
 ```
 
-# How to run Datasette
+## How to run Datasette
 
 You need a SQLite database with the name `iati.sqlite`. Either: 
 
@@ -143,7 +158,7 @@ To run datasette as a local server, run:
     cp datasette/templates/base.template.html datasette/templates/base.html
     datasette --host 0.0.0.0 -i iati.sqlite --template-dir=datasette/templates --static iatistatic:datasette/static
 
-## Why base.template.html?
+### Why base.template.html?
 
 On the server our deploy scripts will copy base.template.html to base.html and then edit TABLES.DOMAIN.EXAMPLE.COM to the real domain.
 
