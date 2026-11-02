@@ -9,6 +9,7 @@ version = "1.0.0"
 readme = "README.md"
 dependencies = [
   "boto3",
+  "certifi>=2026.10.19",
   "click",
   "fastavro",
   "google-cloud-bigquery",
