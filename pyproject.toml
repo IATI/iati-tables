@@ -9,6 +9,7 @@ version = "1.0.0"
 readme = "README.md"
 dependencies = [
   "boto3",
+  # Not imported directly; minimum version required for GHSA-6q48-6c7w-9gw2
   "certifi>=2026.10.19",
   "click",
   "fastavro",
